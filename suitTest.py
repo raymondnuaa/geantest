@@ -13,8 +13,8 @@ from PassFailErrorExample import TestPassFailErrorExample
 
 if __name__ == '__main__':    
     
-    suite1 = unittest.TestLoader().loadTestsFromTestCase(TestOrdersFileImport)
-    #suite2 = unittest.TestLoader().loadTestsFromTestCase(TestOrdersOnlineImport)
+    #suite1 = unittest.TestLoader().loadTestsFromTestCase(TestOrdersFileImport)
+    suite2 = unittest.TestLoader().loadTestsFromTestCase(TestOrdersOnlineImport)
     #suite3 = unittest.TestLoader().loadTestsFromTestCase(TestOrdersCreate)
     #suite4 = unittest.TestLoader().loadTestsFromTestCase(TestOrdersQuery)
     #suite5 = unittest.TestLoader().loadTestsFromTestCase(TestOrdersReAssign)
@@ -22,7 +22,7 @@ if __name__ == '__main__':
     
     #suite = unittest.TestSuite([suite1, suite2, suite3, suite4, suite5, suite6])
     
-    suite = unittest.TestSuite([suite1])
+    suite = unittest.TestSuite([suite2])
     
     #unittest.TextTestRunner(verbosity=2).run(suite)
     
