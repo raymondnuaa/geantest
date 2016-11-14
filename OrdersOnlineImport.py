@@ -30,11 +30,11 @@ class TestOrdersOnlineImport(unittest.TestCase):
         time.sleep(3)
         
         select = Select(driver.find_element_by_id("u651_input"))        
-        select.select_by_visible_text("易尊商城")        
+        select.select_by_visible_text(u"易尊商城")        
         time.sleep(1)
         
         select = Select(driver.find_element_by_id("u665_input"))        
-        select.select_by_visible_text("预约导入")        
+        select.select_by_visible_text(u"预约导入")        
         time.sleep(1)
         
         
@@ -46,11 +46,9 @@ class TestOrdersOnlineImport(unittest.TestCase):
         elem.click()
         time.sleep(3)
         
-        #return driver.alert_is_present
-        alert = driver.switch_to.alert
-        elem  = alert.find_element_by_id('alert-title')
-        print elem
         
+        elem  = driver.find_element_by_id('alert-title')
+        self.assertEqual(elem.text, u'请选择开始时间！', 'Online import failed')
     
     def test_B2_OnlineImport(self):    
         self.driver.quit()
