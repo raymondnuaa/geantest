@@ -9,20 +9,33 @@ from OrdersCreate import TestOrdersCreate
 from OrdersQuery import TestOrdersQuery
 from OrdersReAssign import TestOrdersReAssign
 
+from OrdersAudit import TestOrdersAudit
+from OrdersReceive import TestOrdersReceive
+from OrdersConfirm import TestOrdersConfirm
+from OrdersAccount import TestOrdersAccount
+from OrdersDelivery import TestOrdersDelivery
+
 from PassFailErrorExample import TestPassFailErrorExample
 
 if __name__ == '__main__':    
     
-    suite1 = unittest.TestLoader().loadTestsFromTestCase(TestOrdersFileImport)
-    suite2 = unittest.TestLoader().loadTestsFromTestCase(TestOrdersOnlineImport)
-    suite3 = unittest.TestLoader().loadTestsFromTestCase(TestOrdersCreate)
-    suite4 = unittest.TestLoader().loadTestsFromTestCase(TestOrdersQuery)
-    #suite5 = unittest.TestLoader().loadTestsFromTestCase(TestOrdersReAssign)
-    #suite6 = unittest.TestLoader().loadTestsFromTestCase(TestPassFailErrorExample)
+    suite11 = unittest.TestLoader().loadTestsFromTestCase(TestOrdersFileImport)
+    suite12 = unittest.TestLoader().loadTestsFromTestCase(TestOrdersOnlineImport)
+    suite13 = unittest.TestLoader().loadTestsFromTestCase(TestOrdersCreate)
+    suite14 = unittest.TestLoader().loadTestsFromTestCase(TestOrdersQuery)
+    suite15 = unittest.TestLoader().loadTestsFromTestCase(TestOrdersReAssign)
     
-    #suite = unittest.TestSuite([suite1, suite2, suite3, suite4, suite5, suite6])
+    s1 = [suite11, suite12, suite13, suite14, suite15]
     
-    suite = unittest.TestSuite([suite1, suite2, suite3, suite4])
+    suite21 = unittest.TestLoader().loadTestsFromTestCase(TestOrdersAudit)
+    suite22 = unittest.TestLoader().loadTestsFromTestCase(TestOrdersReceive)
+    suite23 = unittest.TestLoader().loadTestsFromTestCase(TestOrdersConfirm)
+    suite24 = unittest.TestLoader().loadTestsFromTestCase(TestOrdersAccount)
+    suite25 = unittest.TestLoader().loadTestsFromTestCase(TestOrdersDelivery)
+    
+    s2 = [suite21, suite22, suite23, suite24, suite25]
+    
+    suite = unittest.TestSuite(s2)
     
     #unittest.TextTestRunner(verbosity=2).run(suite)
     
