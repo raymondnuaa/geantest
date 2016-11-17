@@ -72,11 +72,13 @@ class TestOrdersQuery(unittest.TestCase):
         
         for handle in driver.window_handles:
             driver.switch_to_window(handle)
+            
         
-        elem = driver.find_element_by_id('u1975_img')
-        imgSrc = elem.get_attribute('src')
+        elem = driver.find_element_by_xpath("//table[@id='productList']/thead/tr/th[1]")
+        #imgSrc = elem.get_attribute('src')
         
-        self.assertTrue('u1953.png' in imgSrc)
+        
+        self.assertTrue(elem.text, u'入网信息')
         
     def test_D4_ResultsExport(self):
         self.driver.quit()
