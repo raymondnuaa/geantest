@@ -9,9 +9,11 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import Select
 
+from TestConfig import *
+
 class TestOrdersQuery(unittest.TestCase):
-    url    = 'http://115.29.249.35:9999/'
-    driver = webdriver.Chrome('C:\Python27\chromedriver.exe')
+    url    = TestConfig.url
+    driver = webdriver.Chrome(TestConfig.chrome)
     
     def setUp(self):
         pass

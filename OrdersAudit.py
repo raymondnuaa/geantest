@@ -9,14 +9,16 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import Select
 
+from TestConfig import *
+
 class TestOrdersAudit(unittest.TestCase):
-    url    = 'http://115.29.249.35:9999/'
-    driver = webdriver.Chrome('C:\Python27\chromedriver.exe')
+    url    = TestConfig.url
+    driver = webdriver.Chrome(TestConfig.chrome)
     
     def setUp(self):
         pass
     
-    def test_F1_QueryResults(self):    
+    def test_F1_ResetQueryCondition(self):    
         driver = self.driver
         try:
             driver.get(self.url)
@@ -53,10 +55,24 @@ class TestOrdersAudit(unittest.TestCase):
         msisdn  = elem.text
         
         self.assertEqual(orderSn+msisdn, '')
-    def test_F2_AuditButton(self):    
+    
+    def test_F2_QueryResult(self):
+        driver = self.driver
+        elem   = driver.find_element_by_name('seqNo')
+        elem.send_keys('14794481969')
+        time.sleep(1)
+        
+        elem = driver.find_element_by_xpath("//button[@onclick='onclickQueryOrdersBtn()']")
+        elem.click()
+        time.sleep(3)
+        
+        elem = driver.find_element_by_id("dataTable_g")
+        self.assertTrue(elem.text.find('14794481969') != -1)
+    
+    def test_F3_AuditButton(self):    
         pass
         
-    def test_F3_DetailsAudit(self): 
+    def test_F4_DetailsAudit(self): 
         self.driver.quit()   
         pass
         

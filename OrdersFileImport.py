@@ -9,10 +9,12 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import Select
 
+from TestConfig import *
+
 class TestOrdersFileImport(unittest.TestCase):    
-    url    = 'http://115.29.249.35:9999/'
-    driver = webdriver.Chrome('C:\Python27\chromedriver.exe')
-    downLoadPath = 'C:\Users\zzz\Downloads'
+    url    = TestConfig.url
+    driver = webdriver.Chrome(TestConfig.chrome)
+    downLoadPath = TestConfig.downloadPath
     
     def setUp(self):        
         print 'set up'
