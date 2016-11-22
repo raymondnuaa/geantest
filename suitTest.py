@@ -22,8 +22,9 @@ s1 = [suite11, suite12, suite13, suite14, suite15]
 
 
 #F1S2 functionalities  
-from OrdersAudit import TestOrdersAudit
+from OrdersDelivery import TestOrdersDelivery
 '''
+from OrdersAudit import TestOrdersAudit
 from OrdersReceive import TestOrdersReceive
 from OrdersConfirm import TestOrdersConfirm
 from OrdersAccount import TestOrdersAccount
@@ -37,8 +38,8 @@ suite25 = unittest.TestLoader().loadTestsFromTestCase(TestOrdersDelivery)
 
 s2 = [suite21, suite22, suite23, suite24, suite25]
 '''
-suite21 = unittest.TestLoader().loadTestsFromTestCase(TestOrdersAudit)
-s2 = [suite21]
+suite25 = unittest.TestLoader().loadTestsFromTestCase(TestOrdersDelivery)
+s2 = [suite25]
 
 suite = unittest.TestSuite(s2)
 

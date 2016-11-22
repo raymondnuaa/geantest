@@ -18,7 +18,7 @@ class TestOrdersDelivery(unittest.TestCase):
     def setUp(self):
         pass
     
-    def test_J1_QueryResults(self):  
+    def test_J1_ResetQueryCondition(self):  
         driver = self.driver
         try:
             driver.get(self.url)
@@ -32,17 +32,59 @@ class TestOrdersDelivery(unittest.TestCase):
         elem.click()
         time.sleep(3)   
         
+        elem = driver.find_element_by_xpath("//img[@src='images/down1.png']")
+        elem.click()
+        time.sleep(3)
         
-    def test_J2_DeliveryButton(self):    
-        pass
-               
-    def test_J3_FallBack(self):   
-        pass
+        elem  = driver.find_element_by_name('seqNo')
+        elem.send_keys('123456789')
+        time.sleep(1)
         
-    def test_J3_Details(self):
+        elem  = driver.find_element_by_name('netinfo_number')
+        elem.send_keys('987654321')
+        time.sleep(1)
+        
+        elem = driver.find_element_by_xpath("//button[@onclick='onclickResetBtn()']")
+        elem.click()
+        time.sleep(3)
+        
+        elem  = driver.find_element_by_name('seqNo')
+        orderSn = elem.text
+        
+        elem  = driver.find_element_by_name('netinfo_number')
+        msisdn  = elem.text
+        
+        self.assertEqual(orderSn+msisdn, '')
+        
+        
+    def test_J2_QueryResults(self):
+        driver = self.driver
+        elem = driver.find_element_by_xpath("//button[@onclick='onclickCloseBtn()']")
+        elem.click()
+        time.sleep(3)
+        
+        elem  = driver.find_element_by_name('seqNo')
+        elem.send_keys('147944819710')
+        time.sleep(1)
+        
+        elem = driver.find_element_by_xpath("//button[@onclick='onclickQueryOrdersBtn()']")
+        elem.click()
+        time.sleep(3)
+        
+        elem = driver.find_element_by_id("dataTable_g")
+        self.assertTrue(elem.text.find('147944819710') != -1)
+        
+    def test_J3_DeliveryButton(self):    
         driver = self.driver
         elem = driver.find_element_by_xpath("//table[@id='dataTable_g']/tbody/tr/td[6]/div/button")
         elem.click()
         time.sleep(3)
+        
+               
+    def test_J4_FallBack(self):   
+        pass
+        
+    def test_J5_Details(self):
+        
           
         driver.quit()

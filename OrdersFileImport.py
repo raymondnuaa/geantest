@@ -59,7 +59,8 @@ class TestOrdersFileImport(unittest.TestCase):
         time.sleep(3)
         
         elem = self.driver.find_element_by_id('file')
-        elem.send_keys('C:\\Users\\zzz\\Downloads\\ImportOrderTemplate_upload.xls')
+        tempFileName = self.downLoadPath + '\\ImportOrderTemplate_upload.xls'
+        elem.send_keys(tempFileName)
         time.sleep(2)
         
         elem = self.driver.find_element_by_id('u1151')
