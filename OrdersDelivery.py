@@ -76,15 +76,30 @@ class TestOrdersDelivery(unittest.TestCase):
         
     def test_J3_DeliveryButton(self):    
         driver = self.driver
+        
         elem = driver.find_element_by_xpath("//table[@id='dataTable_g']/tbody/tr/td[6]/div/button")
         elem.click()
         time.sleep(3)
         
+        driver.switch_to_window(driver.window_handles[1])        
+        elem = driver.find_element_by_xpath("//div[@class='second']")
+        
+        self.assertTrue(elem.text.find('147944819710') != -1)        
                
     def test_J4_FallBack(self):   
-        pass
+        driver = self.driver
+        
+        driver.close()
+        
+        driver.switch_to_window(driver.window_handles[0]) 
+        
+        elem = driver.find_element_by_xpath("//img[@src='images/down1.png']")
+        elem.click()
+        time.sleep(3)
+        
+        
         
     def test_J5_Details(self):
-        
+        driver = self.driver
           
         driver.quit()
