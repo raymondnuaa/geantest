@@ -13,10 +13,11 @@ from TestConfig import *
 
 class TestOrdersConfirm(unittest.TestCase):
     url    = TestConfig.url
-    driver = webdriver.Chrome(TestConfig.chrome)
+    driver = None
     
     def setUp(self):
-        pass
+        if(TestOrdersConfirm.driver is None):
+            TestOrdersConfirm.driver = webdriver.Chrome(TestConfig.chrome)
     
     def test_H1_QueryResults(self):    
         pass
@@ -28,6 +29,8 @@ class TestOrdersConfirm(unittest.TestCase):
         pass
         
     def test_H4_FallBack(self):   
-        pass
+        driver = TestOrdersConfirm.driver
+        
+        driver.quit() 
         
     

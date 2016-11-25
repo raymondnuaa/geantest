@@ -3,7 +3,6 @@ import random
 import unittest
 import HTMLTestRunner
 
-'''
 #F1S1 functionalities
 from OrdersFileImport import TestOrdersFileImport
 from OrdersOnlineImport import TestOrdersOnlineImport
@@ -18,12 +17,11 @@ suite14 = unittest.TestLoader().loadTestsFromTestCase(TestOrdersQuery)
 suite15 = unittest.TestLoader().loadTestsFromTestCase(TestOrdersReAssign)
 
 s1 = [suite11, suite12, suite13, suite14, suite15]
-'''  
+
+suite = unittest.TestSuite(s1)
 
 
 #F1S2 functionalities  
-from OrdersDelivery import TestOrdersDelivery
-'''
 from OrdersAudit import TestOrdersAudit
 from OrdersReceive import TestOrdersReceive
 from OrdersConfirm import TestOrdersConfirm
@@ -37,11 +35,9 @@ suite24 = unittest.TestLoader().loadTestsFromTestCase(TestOrdersAccount)
 suite25 = unittest.TestLoader().loadTestsFromTestCase(TestOrdersDelivery)
 
 s2 = [suite21, suite22, suite23, suite24, suite25]
-'''
-suite25 = unittest.TestLoader().loadTestsFromTestCase(TestOrdersDelivery)
-s2 = [suite25]
 
 suite = unittest.TestSuite(s2)
+
 
 #unittest.TextTestRunner(verbosity=2).run(suite)
 

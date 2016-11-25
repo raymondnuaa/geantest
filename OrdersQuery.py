@@ -13,19 +13,20 @@ from TestConfig import *
 
 class TestOrdersQuery(unittest.TestCase):
     url    = TestConfig.url
-    driver = webdriver.Chrome(TestConfig.chrome)
+    driver = None
     
     def setUp(self):
-        pass
+        if(TestOrdersQuery.driver is None):
+            TestOrdersQuery.driver = webdriver.Chrome(TestConfig.chrome) 
         
     def test_D1_ResetSettings(self):
-        driver = self.driver
+        driver = TestOrdersQuery.driver
         try:
             driver.get(self.url)
             time.sleep(3)
         except Exception as e:        
             print(traceback.format_exc())
-            self.driver.quit()
+            driver.quit()
         
         pathStr = "//a[@href='%s']" % (self.url+'queryOrders')
         elem = driver.find_element_by_xpath(pathStr)
@@ -53,7 +54,7 @@ class TestOrdersQuery(unittest.TestCase):
         self.assertEqual(orderSn+msisdn, '')
         
     def test_D2_QueryResults(self):    
-        driver = self.driver
+        driver = TestOrdersQuery.driver
         
         elem  = driver.find_element_by_name('seqNo')
         elem.send_keys('423696703')
@@ -67,7 +68,7 @@ class TestOrdersQuery(unittest.TestCase):
         self.assertEqual(elem.text, u"订单编号：423696703", 'Order query failed')
 
     def test_D3_OrderDetails(self):
-        driver = self.driver
+        driver = TestOrdersQuery.driver
         elem = driver.find_element_by_xpath("//table[@id='table_id_example']/tbody/tr/td[6]/a")
         elem.click()
         time.sleep(3)
@@ -83,4 +84,5 @@ class TestOrdersQuery(unittest.TestCase):
         self.assertTrue(elem.text, u'入网信息')
         
     def test_D4_ResultsExport(self):
-        self.driver.quit()
+        driver = TestOrdersQuery.driver
+        driver.quit()

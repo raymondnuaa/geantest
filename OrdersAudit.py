@@ -13,19 +13,20 @@ from TestConfig import *
 
 class TestOrdersAudit(unittest.TestCase):
     url    = TestConfig.url
-    driver = webdriver.Chrome(TestConfig.chrome)
+    driver = None
     
     def setUp(self):
-        pass
+        if(TestOrdersAudit.driver is None):
+            TestOrdersAudit.driver = webdriver.Chrome(TestConfig.chrome)
     
     def test_F1_ResetQueryCondition(self):    
-        driver = self.driver
+        driver = TestOrdersAudit.driver
         try:
             driver.get(self.url)
             time.sleep(3)
         except Exception as e:        
             print(traceback.format_exc())
-            self.driver.quit()
+            TestOrdersAudit.driver.quit()
         
         pathStr = "//a[@href='%s']" % (self.url+'ManagerIndex')
         elem = driver.find_element_by_xpath(pathStr)
@@ -57,7 +58,8 @@ class TestOrdersAudit(unittest.TestCase):
         self.assertEqual(orderSn+msisdn, '')
     
     def test_F2_QueryResult(self):
-        driver = self.driver
+        driver = TestOrdersAudit.driver
+        
         elem   = driver.find_element_by_name('seqNo')
         elem.send_keys('14794481969')
         time.sleep(1)
@@ -73,7 +75,8 @@ class TestOrdersAudit(unittest.TestCase):
         pass
         
     def test_F4_DetailsAudit(self): 
-        self.driver.quit()   
+        driver = TestOrdersAudit.driver
+        driver.quit()   
         pass
         
     

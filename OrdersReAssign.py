@@ -13,10 +13,11 @@ from TestConfig import *
 
 class TestOrdersReAssign(unittest.TestCase):
     url    = TestConfig.url
-    driver = webdriver.Chrome(TestConfig.chrome)
+    driver = None
     
     def setUp(self):
-        pass
+        if(TestOrdersReAssign.driver is None):
+            TestOrdersReAssign.driver = webdriver.Chrome(TestConfig.chrome) 
     
     def test_E1_ResetSettings(self):    
         pass
@@ -43,7 +44,8 @@ class TestOrdersReAssign(unittest.TestCase):
         pass
         
     def test_E9_ResultsBatchRecycle(self):
-        pass
+        driver = TestOrdersReAssign.driver
+        driver.quit()
     
     
     

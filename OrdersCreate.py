@@ -13,13 +13,14 @@ from TestConfig import *
 
 class TestOrdersCreate(unittest.TestCase):
     url    = TestConfig.url
-    driver = webdriver.Chrome(TestConfig.chrome)
+    driver = None
     
     def setUp(self):
-        pass
+        if(TestOrdersCreate.driver is None):
+            TestOrdersCreate.driver = webdriver.Chrome(TestConfig.chrome) 
         
     def test_C1_MandatoryInputFields(self):
-        driver = self.driver
+        driver = TestOrdersCreate.driver
         try:
             driver.get(self.url)
             time.sleep(3)
@@ -41,7 +42,8 @@ class TestOrdersCreate(unittest.TestCase):
         
 
     def test_C2_OptionalInputFields(self):
-        driver = self.driver
+        driver = TestOrdersCreate.driver
+        
         elem  = driver.find_element_by_id('alert-yesbtn-title')
         elem.click()
         time.sleep(1)
@@ -66,5 +68,5 @@ class TestOrdersCreate(unittest.TestCase):
         
         self.assertEqual(orderSn+msisdn, '')
         
-        self.driver.quit()
+        driver.quit()
         pass

@@ -13,19 +13,20 @@ from TestConfig import *
 
 class TestOrdersReceive(unittest.TestCase):
     url    = TestConfig.url
-    driver = webdriver.Chrome(TestConfig.chrome)
+    driver = None
     
     def setUp(self):
-        pass
+        if(TestOrdersReceive.driver is None):
+            TestOrdersReceive.driver = webdriver.Chrome(TestConfig.chrome)
     
     def test_G1_QueryResults(self):    
-        driver = self.driver
+        driver = TestOrdersReceive.driver
         try:
             driver.get(self.url)
             time.sleep(3)
         except Exception as e:        
             print(traceback.format_exc())
-            self.driver.quit()
+            driver.quit()
         
         pathStr = "//a[@href='%s']" % (self.url+'fetchreceiveOrders')
         elem = driver.find_element_by_xpath(pathStr)
@@ -60,7 +61,9 @@ class TestOrdersReceive(unittest.TestCase):
         pass
         
     def test_G3_DetailsCheck(self):   
-        self.driver.quit() 
+        driver = TestOrdersReceive.driver
+        
+        driver.quit() 
         pass
         
     

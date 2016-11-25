@@ -13,19 +13,20 @@ from TestConfig import *
 
 class TestOrdersOnlineImport(unittest.TestCase):
     url    = TestConfig.url
-    driver = webdriver.Chrome(TestConfig.chrome)
+    driver = None
     
     def setUp(self):
-        pass
+        if(TestOrdersOnlineImport.driver is None):
+            TestOrdersOnlineImport.driver = webdriver.Chrome(TestConfig.chrome) 
         
     def test_B1_ImportSettings(self):
-        driver = self.driver
+        driver = TestOrdersOnlineImport.driver
         try:
             driver.get(self.url)
             time.sleep(3)
         except Exception as e:        
             print(traceback.format_exc())
-            self.driver.quit()
+            driver.quit()
             
         elem = driver.find_element_by_id('u5')
         elem.click()
@@ -53,6 +54,7 @@ class TestOrdersOnlineImport(unittest.TestCase):
         self.assertEqual(elem.text, u'请选择开始时间！', 'Online import failed')
     
     def test_B2_OnlineImport(self):    
-        self.driver.quit()
+        driver = TestOrdersOnlineImport.driver
+        driver.quit()
         pass
 
