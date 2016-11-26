@@ -13,6 +13,7 @@ from TestConfig import *
 
 class TestOrdersAccount(unittest.TestCase):
     url    = TestConfig.url
+    driver = None
     
     def setUp(self):
         if(TestOrdersAccount.driver is None):

@@ -13,19 +13,20 @@ from TestConfig import *
 
 class TestOrdersDelivery(unittest.TestCase):
     url    = TestConfig.url
-    driver = webdriver.Chrome(TestConfig.chrome)
+    driver = None
     
     def setUp(self):
-        pass
+        if(TestOrdersDelivery.driver is None):
+            TestOrdersDelivery.driver = webdriver.Chrome(TestConfig.chrome)
     
     def test_J1_ResetQueryCondition(self):  
-        driver = self.driver
+        driver = TestOrdersDelivery.driver
         try:
             driver.get(self.url)
             time.sleep(3)
         except Exception as e:        
             print(traceback.format_exc())
-            self.driver.quit()
+            driver.quit()
         
         pathStr = "//a[@href='%s']" % (self.url+'OrderDelivery')
         elem = driver.find_element_by_xpath(pathStr)
@@ -58,7 +59,7 @@ class TestOrdersDelivery(unittest.TestCase):
         
         
     def test_J2_QueryResults(self):
-        driver = self.driver
+        driver = TestOrdersDelivery.driver
         elem = driver.find_element_by_xpath("//button[@onclick='onclickCloseBtn()']")
         elem.click()
         time.sleep(3)
@@ -75,7 +76,7 @@ class TestOrdersDelivery(unittest.TestCase):
         self.assertTrue(elem.text.find('147944819710') != -1)
         
     def test_J3_DeliveryButton(self):    
-        driver = self.driver
+        driver = TestOrdersDelivery.driver
         
         elem = driver.find_element_by_xpath("//table[@id='dataTable_g']/tbody/tr/td[6]/div/button")
         elem.click()
@@ -87,19 +88,14 @@ class TestOrdersDelivery(unittest.TestCase):
         self.assertTrue(elem.text.find('147944819710') != -1)        
                
     def test_J4_FallBack(self):   
-        driver = self.driver
-        
-        driver.close()
-        
+        driver = TestOrdersDelivery.driver        
         driver.switch_to_window(driver.window_handles[0]) 
         
         elem = driver.find_element_by_xpath("//img[@src='images/down1.png']")
         elem.click()
-        time.sleep(3)
-        
-        
+        time.sleep(3)        
         
     def test_J5_Details(self):
-        driver = self.driver
+        driver = TestOrdersDelivery.driver
           
         driver.quit()

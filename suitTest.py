@@ -36,7 +36,8 @@ suite25 = unittest.TestLoader().loadTestsFromTestCase(TestOrdersDelivery)
 
 s2 = [suite21, suite22, suite23, suite24, suite25]
 
-suite = unittest.TestSuite(s2)
+
+suite = unittest.TestSuite(s1+s2)
 
 
 #unittest.TextTestRunner(verbosity=2).run(suite)
