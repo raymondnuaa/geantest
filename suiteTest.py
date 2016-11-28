@@ -18,9 +18,6 @@ suite15 = unittest.TestLoader().loadTestsFromTestCase(TestOrdersReAssign)
 
 s1 = [suite11, suite12, suite13, suite14, suite15]
 
-suite = unittest.TestSuite(s1)
-
-
 #F1S2 functionalities  
 from OrdersAudit import TestOrdersAudit
 from OrdersReceive import TestOrdersReceive
@@ -36,8 +33,12 @@ suite25 = unittest.TestLoader().loadTestsFromTestCase(TestOrdersDelivery)
 
 s2 = [suite21, suite22, suite23, suite24, suite25]
 
+s = s1 + s2
 
-suite = unittest.TestSuite(s1+s2)
+s = [suite14]
+
+suite = unittest.TestSuite(s)
+
 
 
 #unittest.TextTestRunner(verbosity=2).run(suite)

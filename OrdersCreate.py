@@ -21,21 +21,33 @@ class TestOrdersCreate(unittest.TestCase):
         
     def test_C1_MandatoryInputFields(self):
         driver = TestOrdersCreate.driver
+
         try:
             driver.get(self.url)
             time.sleep(3)
         except Exception as e:        
             print(traceback.format_exc())
-            self.driver.quit()
+            driver.quit()
         
-        pathStr = "//a[@href='%s']" % (self.url+'inputOrder')
-        elem = driver.find_element_by_xpath(pathStr)
+        elemPath = '//div[text()="%s"]' % u"订单管理"        
+        elem = driver.find_element_by_xpath(elemPath)        
+        elem.click()
+        time.sleep(3)
+          
+        elems = driver.find_elements_by_xpath("//div[@class='third_header_title ']")        
+        elems[0].click()
+        time.sleep(3)
+        
+        elem = driver.find_element_by_xpath("//div[@routename='inputOrder']")        
         elem.click()
         time.sleep(3)
         
-        elem = driver.find_element_by_class_name('bluebtu')
+        driver.switch_to.frame('inputOrder')
+        
+        
+        elem = driver.find_element_by_xpath("//button[@onclick='saveInfoToLocalStorage()']")
         elem.click()
-        time.sleep(3)
+        time.sleep(3)        
         
         elem  = driver.find_element_by_id('alert-title')
         self.assertEqual(elem.text, u'第三方订单号不能为空！', 'Third party number check failed')

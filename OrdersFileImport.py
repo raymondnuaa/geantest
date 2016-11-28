@@ -8,20 +8,19 @@ from datetime import datetime
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import Select
+from selenium.webdriver.common.by import By
 
 from TestConfig import *
 
 class TestOrdersFileImport(unittest.TestCase):    
     url    = TestConfig.url
     driver = None
-    downLoadPath = TestConfig.downloadPath
+    downLoadPath = TestConfig.downLoadPath
     
     def setUp(self):        
         if(TestOrdersFileImport.driver is None):
             TestOrdersFileImport.driver = webdriver.Chrome(TestConfig.chrome)        
     
-    # need browser settings to allow auto save download files without
-    # file path specifing
     def test_A1_TemplateDownload(self):
         driver = TestOrdersFileImport.driver
         
@@ -37,11 +36,25 @@ class TestOrdersFileImport(unittest.TestCase):
             print(traceback.format_exc())
             driver.quit()
         
-        btnId="u1"
-        elem = driver.find_element_by_id(btnId)
+        elemPath = '//div[text()="%s"]' % u"订单管理"        
+        elem = driver.find_element_by_xpath(elemPath)        
+        elem.click()
+        time.sleep(3)        
+        
+        #elemPath = "//div[@class='third_header_title'][starts-with(text(), %s)]" % u'订单导入*'
+        #elemPath = '//div[text()="%s"]' % u"订单导入"
+        #elemPath = '//div[starts-with(text(), %s)]' % u'订单导入'
+        
+        elems = driver.find_elements_by_xpath("//div[@class='third_header_title ']")        
+        elems[0].click()
+        time.sleep(3)
+        
+        elem = driver.find_element_by_xpath("//div[@routename='batchImportOrder']")        
         elem.click()
         time.sleep(3)
         
+        driver.switch_to.frame('batchImportOrder')
+                
         btnId="u1156"
         elem = driver.find_element_by_id(btnId)
         elem.click()
@@ -51,17 +64,7 @@ class TestOrdersFileImport(unittest.TestCase):
     
     def test_A2_FileImport(self):
         driver = TestOrdersFileImport.driver
-        try:
-            driver.get(self.url)
-            time.sleep(3)
-        except Exception as e:        
-            print(traceback.format_exc())
-            driver.quit()
-        
-        elem = driver.find_element_by_id('u1')
-        elem.click()
-        time.sleep(3)
-        
+                
         elem = driver.find_element_by_id('file')
         tempFileName = self.downLoadPath + '\\ImportOrderTemplate_upload.xls'
         elem.send_keys(tempFileName)
@@ -71,8 +74,17 @@ class TestOrdersFileImport(unittest.TestCase):
         elem.click()
         time.sleep(5)
         
-        elem = driver.find_element_by_id('alert-title')
-        self.assertEqual(elem.text, u'成功0条，失败10条', 'Import by file failed')
+        elem = driver.find_element_by_xpath("//button[@class='ok_btu']")        
+        elem.click()
+        time.sleep(5)
+        
+        elem = driver.find_element_by_xpath("//button[@onclick='errorRecode()']")        
+        elem.click()
+        time.sleep(3)
+        
+        elem = driver.find_element_by_xpath("//table[@id='error']/tbody/tr/td[3]")         
+        
+        self.assertEqual(elem.text, u'11222222433436', 'Import by file failed')
         
         driver.quit() 
         

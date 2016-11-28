@@ -21,6 +21,7 @@ class TestOrdersOnlineImport(unittest.TestCase):
         
     def test_B1_ImportSettings(self):
         driver = TestOrdersOnlineImport.driver
+        '''
         try:
             driver.get(self.url)
             time.sleep(3)
@@ -52,6 +53,7 @@ class TestOrdersOnlineImport(unittest.TestCase):
         
         elem  = driver.find_element_by_id('alert-title')
         self.assertEqual(elem.text, u'请选择开始时间！', 'Online import failed')
+        '''
     
     def test_B2_OnlineImport(self):    
         driver = TestOrdersOnlineImport.driver

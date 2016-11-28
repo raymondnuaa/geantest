@@ -5,5 +5,5 @@ import unittest
 class TestConfig():
     url    = 'http://115.29.249.35:9999/'
     chrome = 'C:\Python27\chromedriver.exe'  
-    downloadPath = 'C:\Users\zzz\Downloads'    
+    downLoadPath = 'C:\Users\zzz\Downloads'    
     
