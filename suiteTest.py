@@ -35,7 +35,7 @@ s2 = [suite21, suite22, suite23, suite24, suite25]
 
 s = s1 + s2
 
-s = [suite14]
+s = [suite15]
 
 suite = unittest.TestSuite(s)
 
