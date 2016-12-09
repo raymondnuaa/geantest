@@ -82,7 +82,7 @@ class TestOrdersFileImport(unittest.TestCase):
         elem.click()
         time.sleep(3)
         
-        elem = driver.find_element_by_xpath("//table[@id='error']/tbody/tr/td[3]")         
+        elem = driver.find_element_by_xpath("//table[@id='error']/tbody/tr/td[1]")         
         
         self.assertEqual(elem.text, u'11222222433436', 'Import by file failed')
         

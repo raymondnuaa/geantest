@@ -74,12 +74,12 @@ class TestOrdersQuery(unittest.TestCase):
         elem.click()
         time.sleep(3)        
         
-        elem = driver.find_element_by_xpath("//table[@id='table_id_example']/tbody/tr/td[2]/div[2]")
+        elem = driver.find_element_by_xpath("//table[@id='table_id_example']/tbody/tr[2]/td[1]/div[2]")
         self.assertEqual(elem.text, u"订单编号：1114", 'Order query failed')
 
     def test_D3_OrderDetails(self):
         driver = TestOrdersQuery.driver
-        elem = driver.find_element_by_xpath("//table[@id='table_id_example']/tbody/tr/td[6]/a")
+        elem = driver.find_element_by_xpath("//table[@id='table_id_example']/tbody/tr/td[5]/a")
         elem.click()
         time.sleep(3)
         
@@ -89,8 +89,8 @@ class TestOrdersQuery(unittest.TestCase):
             if handle!=nowHandle:
                 driver.switch_to_window(handle)
             
-        elem = driver.find_element_by_xpath("//table[@class='tableforinput']/tbody/tr[2]/td[1]")
-        self.assertEqual(elem.text, u'第三方订单号：')
+        elem = driver.find_element_by_xpath("//table[@class='tableforinput']/tbody/tr[2]/td[1]/span")
+        self.assertEqual(elem.text, u'订单编号：')
         
         driver.switch_to_window(nowHandle)
         driver.switch_to.frame('queryOrders')   

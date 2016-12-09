@@ -74,12 +74,12 @@ class TestOrdersReAssign(unittest.TestCase):
         elem.click()
         time.sleep(3)        
         
-        elem = driver.find_element_by_xpath("//table[@id='dataTable_g']/tbody/tr[2]/td[2]/div[1]")
+        elem = driver.find_element_by_xpath("//table[@id='dataTable_g']/tbody/tr[2]/td[2]/div[2]")
         self.assertEqual(elem.text, u"订单编号：1128", 'Order query failed')    
         
     def test_E3_OrderDetails(self):
         driver = TestOrdersReAssign.driver
-        elem = driver.find_element_by_xpath("//table[@id='dataTable_g']/tbody/tr[2]/td[6]/span/a")
+        elem = driver.find_element_by_xpath("//table[@id='dataTable_g']/tbody/tr[2]/td[6]/div/span/a")
         elem.click()
         time.sleep(3)
         
@@ -89,23 +89,10 @@ class TestOrdersReAssign(unittest.TestCase):
             if handle!=nowHandle:
                 driver.switch_to_window(handle)
             
-        elem = driver.find_element_by_xpath("//table[@class='productList']/thead/tr[1]/th[1]")
-        self.assertEqual(elem.text, u'入网信息')
+        elem = driver.find_element_by_name("orderInfo")
+        self.assertEqual(elem.text, u'订单信息')
         
         driver.switch_to_window(nowHandle)
-        driver.switch_to.frame('queryOrders') 
-    
-    def test_E4_ResultsAssign(self):
-        pass
-        
-    def test_E5_ResultsRecycle(self):
-        pass
-        
-    def test_E6_ResultsBatchAssign(self):
-        pass
-        
-    def test_E7_ResultsBatchRecycle(self):
-        driver = TestOrdersReAssign.driver
         driver.quit()
     
     
